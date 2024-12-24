@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block title %}Scan Results{% endblock %} {% block
+content %}
+<section class="container py-5">
+  <div class="shape-blob1"></div>
+  <div class="shape-blob2"></div>
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg rounded-4 p-4">
+        <!-- Page Title -->
+        <h2 class="fw-bold text-center mb-4">🔍 Scan Results</h2>
+        <p class="text-muted text-center">
+          Scan results for: <strong>{{ url }}</strong>
+        </p>
+        <hr class="my-4" />
+
+        <!-- Scan Summary -->
+        <h4 class="fw-bold text-center">Summary</h4>
+        {% if result.error %}
+        <p class="text-danger text-center">Error: {{ result.error }}</p>
+        {% else %}
+        <div class="row text-center mb-4">
+          <div class="col-md-4">
+            <h5 class="text-danger">Severe</h5>
+            <h3>
+              {{ result.alerts|selectattr("risk", "equalto",
+              "Severe")|list|length }}
+            </h3>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-warning">High</h5>
+            <h3>
+              {{ result.alerts|selectattr("risk", "equalto", "High")|list|length
+              }}
+            </h3>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-primary">Medium</h5>
+            <h3>
+              {{ result.alerts|selectattr("risk", "equalto",
+              "Medium")|list|length }}
+            </h3>
+          </div>
+          <div class="col-md-4 mt-4">
+            <h5 class="text-info">Low</h5>
+            <h3>
+              {{ result.alerts|selectattr("risk", "equalto", "Low")|list|length
+              }}
+            </h3>
+          </div>
+          <div class="col-md-4 mt-4">
+            <h5 class="text-secondary">Informational</h5>
+            <h3>
+              {{ result.alerts|selectattr("risk", "equalto",
+              "Informational")|list|length }}
+            </h3>
+          </div>
+          <div class="col-md-4 mt-4">
+            <h5 class="text-success">Total</h5>
+            <h3>{{ result.alerts|length }}</h3>
+          </div>
+        </div>
+        <hr class="my-4" />
+
+        <!-- Detailed Scan Results -->
+        <h4 class="fw-bold text-center">Detailed Results</h4>
+        {% if result.alerts %}
+        <div class="accordion" id="resultsAccordion">
+          {% for alert in result.alerts %}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+              <button
+                class="accordion-button {% if not loop.first %}collapsed{% endif %}"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse{{ loop.index }}"
+                aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                aria-controls="collapse{{ loop.index }}"
+              >
+                <strong>{{ alert.alert }}</strong> -
+                <span class="text-{{ alert.risk|lower }}"
+                  >{{ alert.risk }}</span
+                >
+              </button>
+            </h2>
+            <div
+              id="collapse{{ loop.index }}"
+              class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+              aria-labelledby="heading{{ loop.index }}"
+              data-bs-parent="#resultsAccordion"
+            >
+              <div class="accordion-body">
+                <p><strong>Description:</strong> {{ alert.description }}</p>
+                <p>
+                  <strong>URL:</strong>
+                  <a href="{{ alert.url }}" target="_blank">{{ alert.url }}</a>
+                </p>
+                <p>
+                  <strong>Risk Level:</strong>
+                  <span class="text-{{ alert.risk|lower }}"
+                    >{{ alert.risk }}</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-success">
+          No vulnerabilities found. Your target is safe!
+        </p>
+        {% endif %} {% endif %}
+
+        <!-- Back to Scan Page -->
+        <div class="text-center mt-5">
+          <a href="/scan" class="btn btn-dark btn-lg px-5">Start a New Scan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

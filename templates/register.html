@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% block title %}Register{% endblock %} {% block
+content %}
+<section class="mt-5 d-flex pb-5 justify-content-center align-items-center">
+  <div class="col-md-8 col-lg-5">
+    <div class="shape-blob1"></div>
+    <div class="shape-blob2"></div>
+    <!-- Register Form Container -->
+    <div class="register-container p-5 rounded-4 shadow-lg bg-white">
+      <h2 class="text-center fw-bold mb-4">Create Account</h2>
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="alert alert-{{ category }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Register Form -->
+      <form method="POST" action="{{ url_for('register') }}">
+        <div class="mb-4">
+          <label for="name" class="form-label fw-semibold">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="form-label fw-semibold"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="confirm-password" class="form-label fw-semibold"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="confirm-password"
+            name="confirm_password"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-dark register-btn w-100 py-2">
+          Register
+        </button>
+      </form>
+
+      <p class="text-center mt-4 text-muted">
+        Already have an account?
+        <a
+          href="{{ url_for('login') }}"
+          class="text-decoration-none fw-bold text-dark"
+          >Log in</a
+        >
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

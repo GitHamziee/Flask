@@ -1,0 +1,120 @@
+{% extends 'base.html' %} {% block title %}Scan URLs{% endblock %} {% block
+content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg rounded-4 p-4">
+        <!-- Page Title -->
+        <h2 class="fw-bold text-center mb-4">
+          🔍 Advanced Vulnerability Scanner
+        </h2>
+        <p class="text-muted text-center">
+          Configure your scan with advanced options to identify vulnerabilities
+          and improve your security posture.
+        </p>
+        <hr class="my-4" />
+
+        <!-- Scan Configuration Form -->
+        <form method="POST" action="/scan">
+          <!-- URL Input -->
+          <div class="mb-4">
+            <label for="url" class="form-label fw-semibold">Target URL</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="url"
+              name="url"
+              placeholder="Enter the target URL (e.g., https://example.com)"
+              required
+            />
+          </div>
+
+          <!-- Scan Options -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label for="scan-type" class="form-label fw-semibold"
+                >Scan Type</label
+              >
+              <select
+                class="form-select form-select-lg"
+                id="scan-type"
+                name="scan_type"
+              >
+                <option value="spider">Spider Scan</option>
+                <option value="active">Active Scan</option>
+                <option value="comprehensive">Comprehensive Scan</option>
+              </select>
+              <small class="text-muted">
+                Choose the type of scan based on your security needs.
+              </small>
+            </div>
+            <div class="col-md-6">
+              <label for="depth" class="form-label fw-semibold"
+                >Max Depth</label
+              >
+              <input
+                type="number"
+                class="form-control form-control-lg"
+                id="depth"
+                name="depth"
+                min="1"
+                max="500"
+                value="100"
+              />
+              <small class="text-muted">
+                Set the crawling depth for the scan.
+              </small>
+            </div>
+          </div>
+
+          <!-- Advanced Options -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Advanced Options</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="enable-auth"
+                name="enable_auth"
+              />
+              <label class="form-check-label" for="enable-auth">
+                Enable Authentication Scanning
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="test-in-scope"
+                name="test_in_scope"
+              />
+              <label class="form-check-label" for="test-in-scope">
+                Test Only In-Scope URLs
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="follow-redirects"
+                name="follow_redirects"
+              />
+              <label class="form-check-label" for="follow-redirects">
+                Follow Redirects During Scan
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center mt-5">
+            <button type="submit" class="btn btn-dark btn-lg px-5">
+              Start Scan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

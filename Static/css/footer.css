@@ -1,0 +1,30 @@
+/* Footer Styling */
+.footer {
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.footer a {
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #6c63ff;
+}
+
+/* Social Media Icons */
+.footer i {
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer i:hover {
+  color: #6c63ff;
+  transform: translateY(-3px);
+}
+
+/* Bottom Border */
+.footer .border-top {
+  border-color: #dee2e6 !important;
+}

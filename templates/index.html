@@ -1,0 +1,173 @@
+{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
+%}
+<!-- Hero Section -->
+<section class="hero-section mb-5 pb-5 position-relative overflow-hidden">
+  <div class="shape-blob1"></div>
+  <div class="shape-blob2"></div>
+  <div class="container min-vh-100 d-flex align-items-center">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">
+          Expose Threats, Secure URLs!
+        </h1>
+        <p
+          class="lead mb-4 text-muted animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          Scan Smart. Stay Secure
+        </p>
+        <div class="">
+          <a
+            href="/register"
+            class="btn btn-primary btn-lg me-3 px-4 rounded-pill"
+            >Dummy</a
+          >
+
+          <a
+            href="/register"
+            class="btn btn-outline-primary btn-lg px-4 rounded-pill"
+            >Become a Member</a
+          >
+        </div>
+      </div>
+      <div class="col-lg-6 animate__animated animate__fadeInRight">
+        <img
+          src="{{ url_for('static', filename='images/Vector.png') }}"
+          alt="Hero Illustration"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-6 bg-light position-relative overflow-hidden">
+  <div class="shape-blob3"></div>
+  <div class="container">
+    <div class="row text-center justify-content-center mb-5">
+      <div class="col-lg-8">
+        <h2 class="display-5 fw-bold mb-3">Powerful Features</h2>
+        <p class="lead text-muted">
+          Discover what makes our platform stand out from the rest
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4 text-center">
+            <div
+              class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3"
+            >
+              <i class="bi bi-lightning-charge-fill"></i>
+            </div>
+            <h4 class="mb-3">Lightning Fast</h4>
+            <p class="text-muted">
+              Experience blazing-fast performance with our optimized
+              infrastructure.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4 text-center">
+            <div
+              class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3"
+            >
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h4 class="mb-3">Secure by Design</h4>
+            <p class="text-muted">
+              Your data is protected with enterprise-grade security measures.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm hover-card">
+          <div class="card-body p-4 text-center">
+            <div
+              class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3"
+            >
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <h4 class="mb-3">Scalable Solution</h4>
+            <p class="text-muted">
+              Grow your application without worrying about infrastructure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-6 position-relative">
+  <div class="shape-blob4"></div>
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-md-3 col-6">
+        <div
+          class="stat-card animate__animated"
+          data-animation="countUp"
+          data-target="15000"
+        >
+          <h3 class="display-4 fw-bold mb-2">15K+</h3>
+          <p class="text-muted mb-0">Happy Users</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div
+          class="stat-card animate__animated"
+          data-animation="countUp"
+          data-target="99"
+        >
+          <h3 class="display-4 fw-bold mb-2">99%</h3>
+          <p class="text-muted mb-0">Uptime</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div
+          class="stat-card animate__animated"
+          data-animation="countUp"
+          data-target="50"
+        >
+          <h3 class="display-4 fw-bold mb-2">50+</h3>
+          <p class="text-muted mb-0">Features</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div
+          class="stat-card animate__animated"
+          data-animation="countUp"
+          data-target="24"
+        >
+          <h3 class="display-4 fw-bold mb-2">24/7</h3>
+          <p class="text-muted mb-0">Support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-6 bg-primary text-white position-relative overflow-hidden">
+  <div class="shape-blob5"></div>
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">
+          Join thousands of satisfied users who have already transformed their
+          ideas into reality.
+        </p>
+        <a href="#" class="btn btn-light btn-lg px-5 rounded-pill"
+          >Start Free Trial</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
