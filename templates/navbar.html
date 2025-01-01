@@ -1,7 +1,7 @@
-<!-- templates/navbar.html -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <!-- Brand Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
       <img
         src="{{ url_for('static', filename='images/logo.png') }}"
         alt="Logo"
@@ -10,6 +10,8 @@
         class="d-inline-block align-text-top"
       />
     </a>
+
+    <!-- Mobile Toggler -->
     <button
       class="navbar-toggler"
       type="button"
@@ -21,25 +23,49 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a
+            class="nav-link {% if request.path == '/' %}active{% endif %}"
+            href="/"
+            >Home</a
+          >
         </li>
+        {% if session.get('user_id') %}
         <li class="nav-item">
-          <a class="nav-link" href="/scan">Scan</a>
+          <a
+            class="nav-link {% if request.path == '/scan' %}active{% endif %}"
+            href="/scan"
+            >Scan</a
+          >
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a
+            class="nav-link {% if request.path == '/scan' %}active{% endif %}"
+            href="/dashboard"
+            >Dashboard</a
+          >
         </li>
+        {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
+          <a
+            class="nav-link {% if request.path == '/contact' %}active{% endif %}"
+            href="/contact"
+            >Contact</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/contact">Contact</a>
-        </li>
+
+        {% endif %}
       </ul>
+
+      <!-- Right-Side Buttons/Dropdown -->
       <div class="d-flex align-items-center">
+        {% if session.get('user_id') %}
+        <!-- Logged-In User Dropdown -->
         <div class="dropdown">
           <a
             href="#"
@@ -55,17 +81,36 @@
               height="40"
               class="rounded-circle me-2"
             />
-            <strong></strong>
+            {{ session['user_name'] }}
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end text-small shadow"
             aria-labelledby="dropdownUser1"
           >
-            <li><a class="dropdown-item" href="/profile">Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li>
+              <a class="dropdown-item" href="/profile">
+                <i class="fas fa-user-circle me-2"></i>Profile
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" href="/logout">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </a>
+            </li>
           </ul>
         </div>
+        {% else %}
+        <!-- Guest Links -->
+        <a class="btn btn-outline-primary me-2" href="/login">
+          <i class="fas fa-sign-in-alt me-1"></i>Login
+        </a>
+        <a class="btn btn-primary" href="/register">
+          <i class="fas fa-user-plus me-1"></i>Register
+        </a>
+        {% endif %}
       </div>
     </div>
   </div>

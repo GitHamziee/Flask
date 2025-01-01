@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %}Unauthorized Access{% endblock %} {%
+block content %}
+<div
+  class="container d-flex align-items-center justify-content-center"
+  style="height: 80vh"
+>
+  <div class="text-center">
+    <h1 class="display-1 fw-bold text-danger">401</h1>
+    <h2 class="fw-bold">Unauthorized Access</h2>
+    <p class="text-muted">
+      You don't have permission to view this page. Please log in to access it.
+    </p>
+    <a href="/login" class="btn btn-primary mt-3">
+      <i class="fas fa-sign-in-alt"></i> Go to Login
+    </a>
+  </div>
+</div>
+{% endblock %}

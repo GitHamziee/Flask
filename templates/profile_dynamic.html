@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %}User Profile{% endblock %} {% block
 content %}
-<section class="container py-5">
+<section class="container-fluid">
   <div class="shape-blob1"></div>
   <div class="shape-blob2"></div>
   <div class="row justify-content-center">
@@ -13,24 +13,27 @@ content %}
             id="profile-tabs"
             role="tablist"
           >
+            <!-- Profile Details Tab -->
             <li class="nav-item">
               <button
                 class="nav-link active"
-                id="profile-tab"
+                id="profile-details-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#profile"
+                data-bs-target="#profile-details"
                 type="button"
                 role="tab"
-                aria-controls="profile"
+                aria-controls="profile-details"
                 aria-selected="true"
               >
                 Profile Details
               </button>
             </li>
+
+            <!-- Edit Profile Tab -->
             <li class="nav-item">
               <button
                 class="nav-link"
-                id="edit-tab"
+                id="edit-profile-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#edit-profile"
                 type="button"
@@ -41,17 +44,33 @@ content %}
                 Edit Profile
               </button>
             </li>
+
+            <!-- Security & Account Tab -->
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                id="security-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#security"
+                type="button"
+                role="tab"
+                aria-controls="security"
+                aria-selected="false"
+              >
+                Security & Account
+              </button>
+            </li>
           </ul>
         </div>
 
         <!-- Tabs Content -->
         <div class="tab-content p-4">
-          <!-- Profile Details -->
+          <!-- TAB 1: Profile Details -->
           <div
             class="tab-pane fade show active"
-            id="profile"
+            id="profile-details"
             role="tabpanel"
-            aria-labelledby="profile-tab"
+            aria-labelledby="profile-details-tab"
           >
             <div class="text-center">
               <img
@@ -63,7 +82,7 @@ content %}
               <h2 class="fw-bold">Hamza Rafique</h2>
               <p class="text-muted">hamzarafique@gmail.com</p>
               <p class="text-muted">
-                <i class="bi bi-geo-alt"></i> Isb , Pakistan
+                <i class="bi bi-geo-alt"></i> Isb, Pakistan
               </p>
             </div>
             <hr />
@@ -71,63 +90,224 @@ content %}
               "Passionate developer who loves clean and elegant code."
             </p>
           </div>
+          <!-- /TAB 1 -->
 
-          <!-- Edit Profile -->
+          <!-- TAB 2: Edit Profile -->
           <div
             class="tab-pane fade"
             id="edit-profile"
             role="tabpanel"
-            aria-labelledby="edit-tab"
+            aria-labelledby="edit-profile-tab"
           >
-            <form>
-              <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your full name"
-                  value="John Doe"
-                />
+            <!-- A header card for the Edit Profile title and optional subtitle -->
+            <div class="card mb-4 border-0 shadow-sm">
+              <div class="card-body text-center">
+                <h3 class="fw-bold">Edit Your Profile</h3>
+                <p class="text-muted mb-0">Update your personal information.</p>
               </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  value="john.doe@example.com"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="bio" class="form-label">Bio</label>
-                <textarea class="form-control" id="bio" name="bio" rows="3">
+            </div>
+
+            <!-- Main form container in a card for a cohesive look -->
+            <div class="card shadow-sm border-0">
+              <div class="card-body p-4">
+                <form>
+                  <!-- Personal Information -->
+                  <div class="row mb-3">
+                    <label
+                      for="name"
+                      class="col-md-3 col-form-label fw-semibold"
+                    >
+                      <i class="bi bi-person fs-5 me-2"></i>Full Name
+                    </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        value="John Doe"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label
+                      for="email"
+                      class="col-md-3 col-form-label fw-semibold"
+                    >
+                      <i class="bi bi-envelope fs-5 me-2"></i>Email Address
+                    </label>
+                    <div class="col-md-9">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value="john.doe@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label
+                      for="bio"
+                      class="col-md-3 col-form-label fw-semibold"
+                    >
+                      <i class="bi bi-card-text fs-5 me-2"></i>Bio
+                    </label>
+                    <div class="col-md-9">
+                      <textarea
+                        class="form-control"
+                        id="bio"
+                        name="bio"
+                        rows="3"
+                        placeholder="Tell us a little about yourself..."
+                      >
 Passionate developer who loves clean and elegant code.</textarea
-                >
+                      >
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label
+                      for="profile-image"
+                      class="col-md-3 col-form-label fw-semibold"
+                    >
+                      <i class="bi bi-image fs-5 me-2"></i>Profile Image
+                    </label>
+                    <div class="col-md-9">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="profile-image"
+                        name="profile-image"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Form Buttons -->
+                  <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-dark me-2">
+                      Save Changes
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary">
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div class="mb-3">
-                <label for="profile-image" class="form-label"
-                  >Profile Image</label
-                >
-                <input
-                  type="file"
-                  class="form-control"
-                  id="profile-image"
-                  name="profile-image"
-                />
+            </div>
+            <!-- End of card -->
+          </div>
+          <!-- /TAB 2 -->
+
+          <!-- TAB 3: Security & Account -->
+          <div
+            class="tab-pane fade"
+            id="security"
+            role="tabpanel"
+            aria-labelledby="security-tab"
+          >
+            <!-- Change Password in a simple, modern card -->
+            <div class="card shadow-sm border-0 mb-4">
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3 d-flex align-items-center">
+                  <i class="bi bi-key fs-4 me-2 text-dark"></i>
+                  Change Password
+                </h5>
+                <p class="text-muted small mb-4">
+                  It’s a good idea to use a strong password that you don’t use
+                  elsewhere.
+                </p>
+
+                <form>
+                  <div class="row mb-3">
+                    <label
+                      for="current-password"
+                      class="col-md-3 col-form-label fw-semibold"
+                      >Current Password</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="current-password"
+                        name="current-password"
+                        placeholder="Enter your current password"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label
+                      for="new-password"
+                      class="col-md-3 col-form-label fw-semibold"
+                      >New Password</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="new-password"
+                        name="new-password"
+                        placeholder="Enter your new password"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <label
+                      for="confirm-new-password"
+                      class="col-md-3 col-form-label fw-semibold"
+                      >Confirm New Password</label
+                    >
+                    <div class="col-md-9">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="confirm-new-password"
+                        name="confirm-new-password"
+                        placeholder="Confirm your new password"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button
+                      type="submit"
+                      class="btn btn-primary px-4 py-2 fw-semibold"
+                    >
+                      Update Password
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div class="text-end">
-                <button type="submit" class="btn btn-dark">Save Changes</button>
-                <button type="reset" class="btn btn-outline-secondary">
-                  Cancel
+            </div>
+
+            <!-- Delete Account in a subtle highlight -->
+            <div
+              class="card shadow-sm border border-1 border-danger-subtle mb-4"
+            >
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3 d-flex align-items-center text-danger">
+                  <i class="bi bi-exclamation-triangle fs-4 me-2"></i>
+                  Delete Account
+                </h5>
+                <p class="text-muted small mb-4">
+                  Deleting your account is permanent and <strong>cannot</strong>
+                  be undone. All your data will be lost.
+                </p>
+                <button type="button" class="btn btn-danger">
+                  Delete Account
                 </button>
               </div>
-            </form>
+            </div>
           </div>
+          <!-- /TAB 3 -->
         </div>
+        <!-- /Tabs Content -->
       </div>
     </div>
   </div>

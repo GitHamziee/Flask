@@ -1,0 +1,246 @@
+{% extends 'base.html' %} {% block title %}Pentesting Dashboard{% endblock %} {%
+block content %}
+<div class="shape-blob1"></div>
+<div class="container py-5">
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">Dashboard</h1>
+    <p class="text-muted">
+      Monitor and manage your website’s performance and security with ease.
+    </p>
+  </div>
+
+  <!-- Overview Section -->
+  <div class="row g-4 mb-5">
+    <div class="col-lg-3 col-md-6">
+      <div
+        class="card shadow-sm border-0 text-center py-4"
+        style="background-color: #f8fafc"
+      >
+        <div class="card-body">
+          <h5 class="text-uppercase text-muted">Total Scans</h5>
+          <h2 class="fw-bold" style="color: #1d4ed8">50</h2>
+          <p class="mb-0 text-muted">Completed: 45</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div
+        class="card shadow-sm border-0 text-center py-4"
+        style="background-color: #fff7f7"
+      >
+        <div class="card-body">
+          <h5 class="text-uppercase text-danger">Critical Threats</h5>
+          <h2 class="fw-bold text-danger">5</h2>
+          <p class="mb-0 text-muted">High: 7</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div
+        class="card shadow-sm border-0 text-center py-4"
+        style="background-color: #fff9db"
+      >
+        <div class="card-body">
+          <h5 class="text-uppercase text-warning">Resolved Issues</h5>
+          <h2 class="fw-bold text-warning">30</h2>
+          <p class="mb-0 text-muted">Pending: 5</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div
+        class="card shadow-sm border-0 text-center py-4"
+        style="background-color: #e6fffa"
+      >
+        <div class="card-body">
+          <h5 class="text-uppercase text-success">Security Score</h5>
+          <h2 class="fw-bold text-success">85%</h2>
+          <p class="mb-0 text-muted">Improved by 5%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold">Recent Scan Results</h4>
+      <!-- Add table-responsive to enable horizontal scrolling on mobile -->
+      <div class="table-responsive mt-4">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Scan Name</th>
+              <th>URL</th>
+              <th>Status</th>
+              <th>Threats</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Test Scan 1</td>
+              <td>http://example.com</td>
+              <td>
+                <span class="badge bg-success">Completed</span>
+              </td>
+              <td>10</td>
+              <td>
+                <a href="#" class="btn btn-sm btn-primary">View</a>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Test Scan 2</td>
+              <td>http://test.com</td>
+              <td>
+                <span class="badge bg-warning">In Progress</span>
+              </td>
+              <td>5</td>
+              <td>
+                <a href="#" class="btn btn-sm btn-primary">View</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="row g-4">
+    <!-- Threat Distribution Chart -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title fw-bold">Threat Distribution</h4>
+          <canvas id="threatDistributionChart" style="height: 250px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Scan Count Chart -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title fw-bold">Monthly Scan Count</h4>
+          <canvas id="monthlyScanChart" style="height: 250px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Threat Severity Over Time Chart -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title fw-bold">Threat Severity Over Time</h4>
+          <canvas id="severityOverTimeChart" style="height: 250px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resolved vs Pending Issues Chart -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title fw-bold">Resolved vs Pending Issues</h4>
+          <canvas id="resolvedPendingChart" style="height: 250px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Threat Distribution Chart
+  const threatCtx = document
+    .getElementById("threatDistributionChart")
+    .getContext("2d");
+  new Chart(threatCtx, {
+    type: "doughnut",
+    data: {
+      labels: ["Critical", "High", "Medium", "Low"],
+      datasets: [
+        {
+          data: [5, 7, 20, 18],
+          backgroundColor: ["#EF4444", "#F59E0B", "#10B981", "#60A5FA"],
+        },
+      ],
+    },
+    options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+  });
+
+  // Monthly Scan Count Chart
+  const monthlyScanCtx = document
+    .getElementById("monthlyScanChart")
+    .getContext("2d");
+  new Chart(monthlyScanCtx, {
+    type: "bar",
+    data: {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+      datasets: [
+        {
+          label: "Scans",
+          data: [12, 15, 20, 25, 18],
+          backgroundColor: "#3B82F6",
+          borderColor: "#1E40AF",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true } } },
+  });
+
+  // Threat Severity Over Time Chart
+  const severityCtx = document
+    .getElementById("severityOverTimeChart")
+    .getContext("2d");
+  new Chart(severityCtx, {
+    type: "line",
+    data: {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+      datasets: [
+        {
+          label: "Critical",
+          data: [3, 5, 8, 6, 5],
+          borderColor: "#EF4444",
+          backgroundColor: "rgba(239, 68, 68, 0.2)",
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: "High",
+          data: [7, 8, 10, 12, 7],
+          borderColor: "#F59E0B",
+          backgroundColor: "rgba(245, 158, 11, 0.2)",
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true } } },
+  });
+
+  // Resolved vs Pending Issues Chart
+  const resolvedCtx = document
+    .getElementById("resolvedPendingChart")
+    .getContext("2d");
+  new Chart(resolvedCtx, {
+    type: "pie",
+    data: {
+      labels: ["Resolved", "Pending"],
+      datasets: [
+        {
+          data: [30, 5],
+          backgroundColor: ["#34D399", "#F87171"],
+        },
+      ],
+    },
+    options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+  });
+</script>
+{% endblock %}
