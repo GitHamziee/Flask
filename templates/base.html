@@ -1,4 +1,3 @@
-<!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,7 +23,12 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/footer.css') }}"
     />
-    <!-- Add these in the head section of base.html -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/toast.css') }}"
+    />
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -33,17 +37,39 @@
   <body>
     {% include 'navbar.html' %}
 
-    <main class="container-fluid">
-      {% block content %}{% endblock %} {% with messages =
-      get_flashed_messages() %} {% if messages %}
-      <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    </main>
+    <main class="container-fluid">{% block content %}{% endblock %}</main>
 
-    {% endif %} {% endwith %} {% include 'footer.html' %}
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="toast align-items-center toast-{{ category }} text-white border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="5000"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <i
+              class="bi bi-info-circle-fill me-2"
+              style="font-size: 1.2rem"
+            ></i>
+            {{ message }}
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
+
+    {% include 'footer.html' %}
 
     <!-- Bootstrap JS Bundle (with Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

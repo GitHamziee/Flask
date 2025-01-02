@@ -74,20 +74,17 @@ content %}
           >
             <div class="text-center">
               <img
-                src="{{ url_for('static', filename='images/signup.png') }}"
+                src="{{ url_for('static', filename='uploads/' + user.profile_image if user.profile_image else 'images/signup.png') }}"
                 alt="Profile Picture"
                 class="rounded-circle mb-3"
                 style="width: 150px; height: 150px"
               />
-              <h2 class="fw-bold">Hamza Rafique</h2>
-              <p class="text-muted">hamzarafique@gmail.com</p>
-              <p class="text-muted">
-                <i class="bi bi-geo-alt"></i> Isb, Pakistan
-              </p>
+              <h2 class="fw-bold">{{ user.name }}</h2>
+              <p class="text-muted">{{ user.email }}</p>
             </div>
             <hr />
             <p class="text-center fst-italic">
-              "Passionate developer who loves clean and elegant code."
+              "{{ user.bio or "No bio provided." }}"
             </p>
           </div>
           <!-- /TAB 1 -->
@@ -99,7 +96,6 @@ content %}
             role="tabpanel"
             aria-labelledby="edit-profile-tab"
           >
-            <!-- A header card for the Edit Profile title and optional subtitle -->
             <div class="card mb-4 border-0 shadow-sm">
               <div class="card-body text-center">
                 <h3 class="fw-bold">Edit Your Profile</h3>
@@ -107,11 +103,13 @@ content %}
               </div>
             </div>
 
-            <!-- Main form container in a card for a cohesive look -->
             <div class="card shadow-sm border-0">
               <div class="card-body p-4">
-                <form>
-                  <!-- Personal Information -->
+                <form
+                  method="POST"
+                  enctype="multipart/form-data"
+                  action="/update_profile"
+                >
                   <div class="row mb-3">
                     <label
                       for="name"
@@ -126,7 +124,7 @@ content %}
                         id="name"
                         name="name"
                         placeholder="Enter your full name"
-                        value="John Doe"
+                        value="{{ user.name }}"
                       />
                     </div>
                   </div>
@@ -145,7 +143,7 @@ content %}
                         id="email"
                         name="email"
                         placeholder="Enter your email"
-                        value="john.doe@example.com"
+                        value="{{ user.email }}"
                       />
                     </div>
                   </div>
@@ -165,7 +163,7 @@ content %}
                         rows="3"
                         placeholder="Tell us a little about yourself..."
                       >
-Passionate developer who loves clean and elegant code.</textarea
+{{ user.bio }}</textarea
                       >
                     </div>
                   </div>
@@ -187,7 +185,6 @@ Passionate developer who loves clean and elegant code.</textarea
                     </div>
                   </div>
 
-                  <!-- Form Buttons -->
                   <div class="text-end mt-4">
                     <button type="submit" class="btn btn-dark me-2">
                       Save Changes
@@ -199,7 +196,6 @@ Passionate developer who loves clean and elegant code.</textarea
                 </form>
               </div>
             </div>
-            <!-- End of card -->
           </div>
           <!-- /TAB 2 -->
 
@@ -210,7 +206,6 @@ Passionate developer who loves clean and elegant code.</textarea
             role="tabpanel"
             aria-labelledby="security-tab"
           >
-            <!-- Change Password in a simple, modern card -->
             <div class="card shadow-sm border-0 mb-4">
               <div class="card-body p-4">
                 <h5 class="fw-bold mb-3 d-flex align-items-center">
@@ -222,7 +217,7 @@ Passionate developer who loves clean and elegant code.</textarea
                   elsewhere.
                 </p>
 
-                <form>
+                <form method="POST" action="/change_password">
                   <div class="row mb-3">
                     <label
                       for="current-password"
@@ -286,7 +281,7 @@ Passionate developer who loves clean and elegant code.</textarea
               </div>
             </div>
 
-            <!-- Delete Account in a subtle highlight -->
+            <!-- Delete Account with Confirmation Modal -->
             <div
               class="card shadow-sm border border-1 border-danger-subtle mb-4"
             >
@@ -299,15 +294,69 @@ Passionate developer who loves clean and elegant code.</textarea
                   Deleting your account is permanent and <strong>cannot</strong>
                   be undone. All your data will be lost.
                 </p>
-                <button type="button" class="btn btn-danger">
+                <!-- Trigger for Modal -->
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteAccountModal"
+                >
                   Delete Account
                 </button>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="deleteAccountModal"
+              tabindex="-1"
+              aria-labelledby="deleteAccountModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      class="modal-title text-danger"
+                      id="deleteAccountModalLabel"
+                    >
+                      Confirm Account Deletion
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-muted">
+                      Are you sure you want to delete your account? This action
+                      <strong>cannot</strong> be undone, and all your data will
+                      be permanently removed.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <form method="POST" action="/delete_account">
+                      <button type="submit" class="btn btn-danger">
+                        Confirm Delete
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <!-- /TAB 3 -->
         </div>
-        <!-- /Tabs Content -->
       </div>
     </div>
   </div>

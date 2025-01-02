@@ -7,30 +7,14 @@
     background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
   "
 >
+  <div class="shape-blob3"></div>
+  <div class="shape-blob2"></div>
   <div class="col-md-8 col-lg-5 position-relative">
     <!-- Background Blobs -->
-    <div class="shape-blob1"></div>
-    <div class="shape-blob2"></div>
 
     <!-- Login Form Container -->
     <div class="login-container p-5 rounded-4 shadow-lg bg-white">
       <h2 class="text-center fw-bold mb-4">Login</h2>
-
-      <!-- Flash Messages -->
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %} {% for category, message in messages %}
-      <div
-        class="alert alert-{{ category }} alert-dismissible fade show"
-        role="alert"
-      >
-        {{ message }}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-        ></button>
-      </div>
-      {% endfor %} {% endif %} {% endwith %}
 
       <!-- Login Form -->
       <form method="POST" action="{{ url_for('login') }}">

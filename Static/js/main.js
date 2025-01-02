@@ -58,3 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Initialize all Bootstrap toasts in the container
+document.addEventListener("DOMContentLoaded", function () {
+  const toastElements = document.querySelectorAll(".toast");
+  toastElements.forEach((toastEl) => {
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  });
+});

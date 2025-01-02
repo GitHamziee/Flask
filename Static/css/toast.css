@@ -1,0 +1,39 @@
+/* Toast Container */
+.toast-container {
+  position: fixed;
+  top: 5rem; /* Ensures it doesn't overlap with the navbar */
+  right: 1rem;
+  z-index: 1050; /* Keeps it above other elements */
+}
+
+/* Toast Styling */
+.toast {
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+/* Success Toast */
+.toast-success {
+  background: linear-gradient(to right, #28a745, #218838);
+  color: white;
+}
+
+/* Danger Toast */
+.toast-danger {
+  background: linear-gradient(to right, #dc3545, #c82333);
+  color: white;
+}
+
+/* Info Toast */
+.toast-info {
+  background: linear-gradient(to right, #17a2b8, #138496);
+  color: white;
+}
+
+/* Close Button */
+.toast .btn-close {
+  color: white;
+  opacity: 1;
+}
